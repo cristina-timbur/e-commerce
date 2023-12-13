@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [Database Diagrams](#databse-diagrams)
+- [Database Diagrams](#database-diagrams)
 - [Endpoints](#Endpoints)
     - [register()](#register)
     - [sign_in()](#sign_in)
@@ -29,7 +29,7 @@
 
 Node server that exposes the basic endpoints necessary to an E-Shop application dedicated to fashion. The project was created as a requirement for the `JavaScript Server` course at University Of Bucharest, Faculty of Mathematics and Computer Science, by <a href="https://github.com/cristina-timbur">Cristina Tîmbur</a> and <a href="https://github.com/vl4dio4n">Vlad-Ioan Bîrsan</a>.
 
-## Databse Diagrams
+## Database Diagrams
 
 [Database Diagrams](database_diagram.pdf)
 
