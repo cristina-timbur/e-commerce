@@ -20,9 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       })
       models.Product.hasMany(models.Review)
       
-      models.Product.belongsToMany(models.Order, {
-        through: 'Order_Items'
-      })
       models.Product.hasMany(models.Order_Items)
 
       models.Product.belongsToMany(models.Cart, {

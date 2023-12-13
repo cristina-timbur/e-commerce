@@ -13,9 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.Order.hasMany(models.User);
 
-      models.Order.belongsToMany(models.Product, {
-        through: 'Order_Items'
-      })
       models.Order.hasMany(models.Order_Items)
 
       models.Order.belongsTo(models.Payment, {

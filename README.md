@@ -31,7 +31,7 @@ Node server that exposes the basic endpoints necessary to an E-Shop application 
 
 ## Database Diagrams
 
-[Database Diagrams](database_diagram.pdf)
+[Database Diagrams](documentation/database_diagram.pdf)
 
 ## Endpoints
 
