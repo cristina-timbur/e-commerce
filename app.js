@@ -1,9 +1,16 @@
 const express = require('express');
-const db = require("./models/index")
+const { graphqlHTTP } = require("express-graphql");
+const schema = require("./graphql");
 
 const app = express();
 
-app.use(express.json());
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!')
