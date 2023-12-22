@@ -2,6 +2,7 @@ const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 const { categoryMutation, categoryQuery } = require("./category");
 const { reviewMutation, reviewQuery } = require("./review");
 const { productMutation, productQuery } = require("./product");
+const { authQuery, authMutation } = require("./auth");
 
 const query = new GraphQLObjectType({
   name: "Query",
@@ -9,6 +10,7 @@ const query = new GraphQLObjectType({
     ...categoryQuery.toConfig().fields,
     ...reviewQuery.toConfig().fields,
     ...productQuery.toConfig().fields,
+    ...authQuery.toConfig().fields,
   },
 });
 
@@ -18,6 +20,7 @@ const mutation = new GraphQLObjectType({
     ...categoryMutation.toConfig().fields,
     ...reviewMutation.toConfig().fields,
     ...productMutation.toConfig().fields,
+    ...authMutation.toConfig().fields,
   },
 });
 

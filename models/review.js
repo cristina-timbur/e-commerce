@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Review.belongsTo(models.Product, {
-        foreignKey: 'ProductId'
-      })
       models.Review.belongsTo(models.User, {
-        foreignKey: 'UserId'
-      })
+        foreignKey: 'UserId',
+      });
+
+      models.Review.belongsTo(models.Product, {
+        foreignKey: 'ProductId',
+      });
     }
   };
   Review.init({
