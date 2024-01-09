@@ -9,31 +9,7 @@ const createCart = async (userId) => {
         console.error("Error at handlers/createCart:", err);
         return { message: err.message }
     }
-}
-
-
-const getCartItems = async (cartId) => {
-    try {
-        const cartItems = await db.Cart_Items.findAll({
-            where: {
-                CartId: cartId
-            },
-            include: [{
-                model: db.Product
-            }]
-        })
-        return cartItems.map(cartItems => {
-            return {
-                ...cartItems.Product.dataValues,
-                price: cartItems.price,
-                quantity: cartItems.quantity
-            }
-        });
-    } catch (err) {
-        console.error("Error at handlers/getCartItems:", err);
-        return { message: err.message }
-    }
-}
+};
 
 
 const addProductToCart = async (UserId, CartId, ProductId, quantity) => {
@@ -156,7 +132,6 @@ const getCarts = async (UserId) => {
 
 module.exports = {
     createCart,
-    getCartItems,
     addProductToCart,
     removeCart,
     removeProductFromCart,

@@ -10,7 +10,6 @@ const { userType } = require("../user/types");
 const { productType } = require("../product/types");
 const { messageResultType } = require("../types");
 const db = require("../../models");
-const { getCartItems } = require("../../handlers/carts");
 
 
 const cartType = new GraphQLObjectType({
@@ -27,7 +26,14 @@ const cartType = new GraphQLObjectType({
         cartItems: { 
             type: new GraphQLList(productType),
             resolve: async (source) => {
-                return await getCartItems(source.id);
+                const cartItems = await source.getCart_Items();
+                const products = await Promise.all(cartItems.map(async cartItem => {
+                    const product = await cartItem.getProduct();
+                    product.dataValues.price = cartItem.price;
+                    product.dataValues.quantity = cartItem.quantity;
+                    return product;
+                }));
+                return products;
             }
         }
     }
