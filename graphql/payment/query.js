@@ -30,7 +30,7 @@ const paymentQuery = new GraphQLObjectType({
             type: new GraphQLList(paymentResultType),
             resolve: async (source, args, context) => {
                 if (!context.user){
-                    return { message: "You have to be authenticated to access this resource!" };
+                    return [{ message: "You have to be authenticated to access this resource!" }];
                 }
                 const result = await getPayments(); 
                 return result;

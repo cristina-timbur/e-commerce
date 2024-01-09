@@ -1,40 +1,41 @@
 const { 
-    GraphQLObjectType, 
-    GraphQLList, 
-    GraphQLID
+    GraphQLObjectType,
+    GraphQLID,
+    GraphQLList
 } = require("graphql");
-const { cartResultType } = require("./types");
+const { orderResultType } = require("./types");
 const { 
-    getCart,
-    getCarts
-} = require("../../handlers/carts");
+    getOrder,
+    getOrders
+} = require("../../handlers/orders");
 
 
-const cartQuery = new GraphQLObjectType({
-    name: "CartQuery",
+
+const orderQuery = new GraphQLObjectType({
+    name: "OrderQuery",
     fields: {
-        cart: {
-            type: cartResultType,
+        order: {
+            type: orderResultType,
             args: {
-                CartId: { type: GraphQLID }
+                OrderId: { type: GraphQLID }
             },
-            resolve: async (source, { CartId }, context) => {
+            resolve: async (source, { OrderId }, context) => {
                 if (!context.user){
                     return { message: "You have to be authenticated to access this resource!" };
                 }
                 const UserId = context.user.id;
-                const result = await getCart(UserId, CartId);
+                const result = await getOrder(UserId, OrderId);
                 return result;
             }
         },
-        carts: {
-            type: new GraphQLList(cartResultType),
+        orders: {
+            type: new GraphQLList(orderResultType),
             resolve: async (source, args, context) => {
                 if (!context.user){
                     return [{ message: "You have to be authenticated to access this resource!" }];
                 }
                 const UserId = context.user.id;
-                const result = await getCarts(UserId);
+                const result = await getOrders(UserId);
                 return result;
             }
         }
@@ -42,4 +43,4 @@ const cartQuery = new GraphQLObjectType({
 });
 
 
-module.exports = cartQuery;
+module.exports = orderQuery;

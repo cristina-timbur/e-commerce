@@ -32,6 +32,9 @@ const productType = new GraphQLObjectType({
     },
     quantity: { 
       type: GraphQLInt,
+      resolve: async (source) => {
+        return source.dataValues.quantity;
+      }
     }
   },
 });
