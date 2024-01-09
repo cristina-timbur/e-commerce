@@ -30,6 +30,9 @@ const productType = new GraphQLObjectType({
         return await source.getCategory();
       },
     },
+    quantity: { 
+      type: GraphQLInt,
+    }
   },
 });
 
@@ -64,5 +67,6 @@ const editProductInputType = new GraphQLInputObjectType({
     newProductData: { type: productInputType },
   },
 });
+
 
 module.exports = { productType, productInputType, productResultType, editProductInputType };

@@ -3,6 +3,8 @@ const { categoryMutation, categoryQuery } = require("./category");
 const { reviewMutation, reviewQuery } = require("./review");
 const { productMutation, productQuery } = require("./product");
 const { authQuery, authMutation } = require("./auth");
+const { cartQuery, cartMutation } = require('./cart');
+
 
 const query = new GraphQLObjectType({
   name: "Query",
@@ -11,6 +13,7 @@ const query = new GraphQLObjectType({
     ...reviewQuery.toConfig().fields,
     ...productQuery.toConfig().fields,
     ...authQuery.toConfig().fields,
+    ...cartQuery.toConfig().fields,
   },
 });
 
@@ -21,6 +24,7 @@ const mutation = new GraphQLObjectType({
     ...reviewMutation.toConfig().fields,
     ...productMutation.toConfig().fields,
     ...authMutation.toConfig().fields,
+    ...cartMutation.toConfig().fields,
   },
 });
 

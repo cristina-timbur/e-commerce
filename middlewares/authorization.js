@@ -13,7 +13,7 @@ const authorizationMiddleware = async (req, res, next) => {
       const userId = decoded.id;
       const user = await db.User.findByPk(userId);
       if (user) {
-        req.user = user;
+        req.user = user.dataValues;
         next();
       }
     } catch (err) {
