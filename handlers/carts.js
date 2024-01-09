@@ -61,25 +61,30 @@ const addProductToCart = async (UserId, CartId, ProductId, quantity) => {
         return updatedCart;
     } catch (err) {
         console.log("Error at handlers/addProductToCart ", err);
-        return { message: err }
+        return { message: err.message }
     }
 }
 
 
 const removeProductFromCart = async (UserId, CartId, ProductId) => {
-    const cart = await db.Cart.findOne({
-        where: {
-            UserId: UserId,
-            id: CartId 
+    try {
+        const cart = await db.Cart.findOne({
+            where: {
+                UserId: UserId,
+                id: CartId 
+            }
+        });
+        if (!cart) {
+            return { message: `Invalid cart or user` };
         }
-    });
-    if (!cart) {
-        return { message: `Invalid cart or user` };
+        const res = await db.Cart_Items.destroy({ where: { CartId: CartId, ProductId: ProductId } });
+        return !res ? 
+            { message: `Cart with id ${CartId} doesn't have product with id ${ProductId}.` } :
+            await db.Cart.findOne({ where: { id: CartId } });
+    } catch (err) {
+        console.error("Error at handlers/removeProductFromCart:", err);
+        return { message: err.message }
     }
-    const res = await db.Cart_Items.destroy({ where: { CartId: CartId, ProductId: ProductId } });
-    return !res ? 
-        { message: `Cart with id ${CartId} doesn't have product with id ${ProductId}.` } :
-        await db.Cart.findOne({ where: { id: CartId } });
 }
 
 
@@ -102,7 +107,7 @@ const updateProductQuantityInCart = async (UserId, CartId, ProductId, quantity) 
             await db.Cart.findOne({ where: { id: CartId } });
     } catch (err) {
         console.log("Error at handlers/addProductToCart", err);
-        return { message: err }
+        return { message: err.message }
     }
 }
 
@@ -122,7 +127,7 @@ const removeCart = async (UserId, CartId) => {
         return { message: "The cart was removed successfully!" }; 
     } catch (err) {
         console.log("Error at handlers/removeCart", err);
-        return { message: err }
+        return { message: err.message }
     }
 }
 
@@ -133,7 +138,7 @@ const getCart = async (UserId, CartId) => {
         return cart == null ? { message: `Cart with id ${CartId} doesn't exist` } : cart;
     } catch (err) {
         console.log("Error at handlers/getCart", err);
-        return { message: err }
+        return { message: err.message }
     }
 }
 
@@ -144,7 +149,7 @@ const getCarts = async (UserId) => {
         return carts;
     } catch (err) {
         console.log("Error at handlers/getCarts", err);
-        return { message: err }
+        return { message: err.message }
     }
 }
 

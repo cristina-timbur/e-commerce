@@ -24,7 +24,6 @@ const cartQuery = new GraphQLObjectType({
                 }
                 const UserId = context.user.id;
                 const result = await getCart(UserId, CartId);
-                console.log(result);
                 return result;
             }
         },
