@@ -31,7 +31,7 @@ const cartQuery = new GraphQLObjectType({
             type: new GraphQLList(cartResultType),
             resolve: async (source, args, context) => {
                 if (!context.user){
-                    return { message: "You have to be authenticated to access this resource!" };
+                    return [{ message: "You have to be authenticated to access this resource!" }];
                 }
                 const UserId = context.user.id;
                 const result = await getCarts(UserId);
