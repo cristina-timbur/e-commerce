@@ -4,12 +4,10 @@ const db = require("../models");
 const { JWT_SECRET_KEY } = require('../config/constants');
 
 const authorizationMiddleware = async (req, res, next) => {
-  const authorization = req.headers.authorization;
-  if (authorization) {
+  const userToken = req.headers.authorization;
+  if (userToken) {
     try {
-      userToken = authorization.replace("Bearer ", "");
       const decoded = jwt.verify(userToken, JWT_SECRET_KEY);
-
       const userId = decoded.id;
       const user = await db.User.findByPk(userId);
       if (user) {

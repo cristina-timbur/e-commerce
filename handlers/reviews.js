@@ -13,7 +13,7 @@ const getProductReviews = async () => {
 const getUserReviewsWithId = async (id) => {
   try {
     const user = await db.User.findByPk(id);
-    const reviews = await user.getProductReviews();
+    const reviews = await user.getReviews();
     return reviews;
   } catch (err) {
     console.log("Error at handlers/getUserReviewsWithId: ", err);
@@ -138,7 +138,7 @@ const removeReviewHandler = async (userId, productId) => {
 const getProductReviewsWithId = async (id) => {
   try {
     const product = await db.Product.findByPk(id);
-    const reviews = await product.getProductReviews();
+    const reviews = await product.getReviews();
     return reviews;
   } catch (err) {
     console.log("Error at handlers/getProductReviewsWithId:", err);
