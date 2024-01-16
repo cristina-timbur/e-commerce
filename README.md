@@ -7,9 +7,6 @@
 - [Endpoints](#Endpoints)
     - [register()](#register)
     - [sign_in()](#sign_in)
-    - [get_user_profile()](#get_user_profile)
-    - [edit_user_profile()](#edit_user_profile)
-    - [delete_account()](#delete_account)
     - [create_product_review()](#create_product_review)
     - [edit_product_review()](#edit_product_review)
     - [get_product_reviews()](#get_product_reviews)
@@ -56,7 +53,11 @@ Node server that exposes the basic endpoints necessary to an E-Shop application 
 
 ```json
 {
-    "status": string
+    "status": string,
+    "data": {
+        "user_id": integer,
+        "username": string,
+    }
 }
 ```
 
@@ -80,78 +81,8 @@ Node server that exposes the basic endpoints necessary to an E-Shop application 
 {
     "status": string,
     "data": {
-        "user_id": integer,
-        "username": string,
         "token": string
     }
-}
-```
-
-### get_user_profile()
-
-<b>Description</b>: Endpoint for getting user profile.</br>
-<b>Method</b>: `GET` </br>
-<b>URL</b>: `https://api/get_user_profile/{{userId}}`</br>
-
-<b>Response</b>:
-
-```json
-{
-    "status": string,
-    "data": {
-        "user_id": integer,
-        "username": string,
-        "email": string,
-        "firstName": string,
-        "lastName": string,
-        "token": string
-    }
-}
-```
-
-### edit_user_profile()
-
-<b>Description</b>: Endpoint for updating user profile.</br>
-<b>Method</b>: `PUT` </br>
-<b>URL</b>: `https://api/edit_user_profile/{{userId}}`</br>
-
-<b>Request Body</b>: 
-
-```json
-{
-    "username": string,
-    "password": string,
-    "email": string,
-    "firstName": string,
-    "lastName": string
-}
-```
-
-<b>Response</b>:
-
-```json
-{
-    "status": string,
-    "data": {
-        "user_id": integer,
-        "username": string,
-        "token": string
-    }
-}
-```
-
-### delete_account()
-
-
-<b>Description</b>: Endpoint for deleting user account.</br>
-<b>Method</b>: `DELETE` </br>
-<b>URL</b>: `https://api/delete_account/{{userId}}`</br>
-
-<b>Response</b>:
-
-```json
-{
-    "status": string
 }
 ```
 
