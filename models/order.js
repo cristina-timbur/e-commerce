@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
       models.Order.hasMany(models.Order_Items)
 
-      models.Order.hasOne(models.Payment);
+      models.Order.belongsTo(models.Payment);
     }
   };
   Order.init({

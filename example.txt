@@ -175,3 +175,60 @@ mutation RemovePayment {
     }
   }
 }
+
+mutation CreateCart {
+  createCart {
+    ... on CartType {
+      id
+      user {
+        id
+        username
+      }
+      cartItems {
+        name
+        description
+      }
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation AddProductToCart {
+  addProductToCart(CartId: 1, ProductId: 1, quantity: 5) {
+    ... on CartType {
+      id
+      user {
+        id
+        username
+      }
+      cartItems {
+        name
+        description
+      }
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation UpdateProductQuantityInCart {
+  updateProductQuantityInCart(CartId: 1, ProductId: 1, quantity: 10) {
+    ... on CartType {
+      id
+      user {
+        id
+        username
+      }
+      cartItems {
+        name
+        description
+      }
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
