@@ -1,0 +1,177 @@
+mutation Register {
+  register(registerInput: { username: "adidas", password: "1234", email: "adidas@gmail.com", firstName: "adidas", lastName: "M"}) {
+         ... on UserType {
+      id
+      username
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation Login {
+  login(loginInput: { username: "adidas", password: "1234"}) {
+		token
+  }
+}
+
+query AllCategories {
+  categories {
+     ... on CategoryType {
+      id
+      name
+    }
+    ... on MessageResult {
+      message
+    }
+  } 
+}
+
+query Category {
+  category(id: 15) {
+    ... on CategoryType {
+      name
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation AddCategory {
+    addCategory(categoryInput: {name: "categ-noua"}) {
+    ... on CategoryType {
+      id
+      name
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation EditCategory {
+  editCategory(id: 17, data: {name: "categ-editata"}) {
+    ... on CategoryType {
+      id
+      name
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation RemoveCategory {
+  removeCategory(id: 15) {
+    ... on CategoryType {
+      id
+      name
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+// user logat
+mutation AddReview {
+  review(ProductId: 10, rating: 5, comment: "nice") {
+    ... on ReviewType {
+      user {
+        id
+        username
+      }
+      product {
+        id
+        name
+      }
+      comment
+      rating
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+query UserReviews {
+  userReviews {
+    user {
+      username
+    }
+    product {
+      id
+      name
+    }
+    comment
+    rating
+  }
+}
+
+query ReviewsWithUserId {
+  reviewsWithUserId(id: 2){
+    product {
+      id
+      name
+      category {
+        name
+      }
+    }
+    comment
+    rating
+  }
+}
+
+query ReviewsWithProductId {
+  reviewsWithProductId(id: 1){
+    product {
+      id
+      name
+    }
+    comment
+    rating
+  }
+}
+
+mutation RemoveReview {
+  removeReview(ProductId: 10) {
+    ... on ReviewType {
+      user {
+        id
+        username
+      }
+      product {
+        id
+        name
+      }
+      comment
+      rating
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+query GetAvailableProducts{
+  availableProducts {
+    id
+    name
+    description
+  }
+}
+
+mutation RemovePayment {
+  removePayment(PaymentId: 25) {
+    ... on PaymentType {
+      id
+      amount
+      provider
+    }
+    ... on MessageResult {
+      message
+    }
+  }
+}
