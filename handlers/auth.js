@@ -10,7 +10,6 @@ const login = async (username, password) => {
         username,
       },
     });
-    console.log(JWT_SECRET_KEY)
     if (user) {
       const result = await bcrypt.compare(password, user.password);
 

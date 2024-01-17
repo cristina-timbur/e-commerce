@@ -18,6 +18,9 @@ const productMutation = new GraphQLObjectType({
         productInput: { type: productInputType },
       },
       resolve: async (source, args, context) => {
+        if (!context.user){
+          return { message: "You have to be authenticated to access this resource!" };
+        }
         const data = args.productInput;
         const result = await createProduct(data);
 
@@ -31,6 +34,9 @@ const productMutation = new GraphQLObjectType({
         id: { type: GraphQLInt },
       },
       resolve: async (source, args, context) => {
+        if (!context.user){
+          return { message: "You have to be authenticated to access this resource!" };
+        }
         const result = await destroyProduct(args.id);
 
         return result;
@@ -44,6 +50,9 @@ const productMutation = new GraphQLObjectType({
         },
       },
       resolve: async (source, args, context) => {
+        if (!context.user){
+          return { message: "You have to be authenticated to access this resource!" };
+        }
         const id = args.data.id;
         const data = args.data.newProductData;
         const result = await editProduct(id, data);

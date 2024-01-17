@@ -75,7 +75,6 @@ mutation RemoveCategory {
   }
 }
 
-// user logat
 mutation AddReview {
   review(ProductId: 10, rating: 5, comment: "nice") {
     ... on ReviewType {
@@ -160,6 +159,9 @@ query GetAvailableProducts{
     id
     name
     description
+    category {
+      name
+    }
   }
 }
 
@@ -196,7 +198,7 @@ mutation CreateCart {
 }
 
 mutation AddProductToCart {
-  addProductToCart(CartId: 1, ProductId: 1, quantity: 5) {
+  addProductToCart(CartId: 33, ProductId: 1, quantity: 5) {
     ... on CartType {
       id
       user {
@@ -206,6 +208,7 @@ mutation AddProductToCart {
       cartItems {
         name
         description
+        quantity
       }
     }
     ... on MessageResult {
@@ -215,7 +218,7 @@ mutation AddProductToCart {
 }
 
 mutation UpdateProductQuantityInCart {
-  updateProductQuantityInCart(CartId: 1, ProductId: 1, quantity: 10) {
+  updateProductQuantityInCart(CartId: 33, ProductId: 1, quantity: 10) {
     ... on CartType {
       id
       user {
@@ -225,6 +228,7 @@ mutation UpdateProductQuantityInCart {
       cartItems {
         name
         description
+        quantity
       }
     }
     ... on MessageResult {
