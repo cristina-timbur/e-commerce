@@ -232,3 +232,345 @@ mutation UpdateProductQuantityInCart {
     }
   }
 }
+
+
+mutation {
+  createCart {
+    ... on CartType {
+      id,
+      UserId,
+      user {
+        username,
+        email,
+        firstName,
+        lastName
+      },
+      cartItems {
+        name,
+      }
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+} 
+
+
+mutation {
+  addProductToCart (CartId: 31, ProductId: 3, quantity: 2){
+    ... on CartType {
+      id,
+      UserId,
+      user {
+        username,
+        firstName,
+        lastName
+      },
+      cartItems {
+        id,
+        name,
+        quantity,
+        price
+      }
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation {
+  updateProductQuantityInCart (CartId: 31, ProductId: 1, quantity: 3){
+    ... on CartType {
+      id,
+      UserId,
+      user {
+        username,
+        firstName,
+        lastName
+      },
+      cartItems {
+        id,
+        name,
+        quantity,
+        price
+      }
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation {
+  removeProductFromCart (CartId: 34, ProductId: 1){
+    ... on CartType {
+      id,
+      UserId,
+      user {
+        username,
+        firstName,
+        lastName
+      },
+      cartItems {
+        id,
+        name,
+        quantity,
+        price
+      }
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+
+mutation {
+  removeCart (CartId: 34) {
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+query {
+   cart (CartId: 31) {
+    ...on CartType {
+      id,
+      UserId,
+      user {
+        username,
+        firstName,
+        lastName
+      },
+      cartItems {
+        id,
+        name,
+        quantity,
+        price,
+        category {
+          name
+        }
+      }
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+
+query {
+   carts {
+    ...on CartType {
+      id,
+      UserId,
+      user {
+        username,
+        firstName,
+        lastName
+      },
+      cartItems {
+        id,
+        name,
+        quantity,
+        price,
+        CategoryId,
+        category {
+          name
+        }
+      }
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+
+query {
+  product (id: 1){
+    id
+    name
+    isAvailable
+    description
+    rating
+    price
+    discount
+    CategoryId
+    category {
+      id
+      name
+    }
+    quantity
+  } 
+}
+
+mutation {
+  createPayment (amount: 1000, provider: "Maestro") {
+    ... on PaymentType {
+      amount,
+      id,
+      provider
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+mutation {
+  removePayment (PaymentId: 36) {
+    ... on PaymentType {
+      amount,
+      id,
+      provider
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+
+query {
+  payment(PaymentId: 35) {
+    ... on PaymentType {
+      id,
+      amount,
+      provider
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+
+query {
+  payments {
+    ... on PaymentType {
+      id,
+      amount,
+      provider
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+
+mutation {
+  createOrder (PaymentId: 36, CartId: 31, status: "On the Way"){
+    ...on OrderType {
+      id,
+      orderItems {
+        id
+        name
+        isAvailable
+        description
+        rating
+        price
+        discount
+        CategoryId
+        category {
+          name
+        }
+        quantity
+      },
+      PaymentId,
+      payment {
+        amount,
+        provider
+      },
+      UserId,
+      user {
+        username,
+        firstName,
+        lastName
+      }
+    },
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+
+mutation {
+  removeOrder (OrderId: 65){
+    ... on MessageResult {
+      message
+    }
+  }
+}
+
+
+query {
+  order (OrderId: 64)  {
+    ... on OrderType {
+      id,
+      orderItems {
+        id
+        name
+        isAvailable
+        description
+        rating
+        price
+        discount
+        CategoryId
+        category {
+          name
+        }
+        quantity
+      },
+      PaymentId,
+      payment {
+        amount,
+        provider
+      },
+      UserId,
+      user {
+        username,
+        firstName,
+        lastName
+      }
+    }
+  }
+}
+
+query {
+  orders{
+    ... on OrderType {
+      id,
+      orderItems {
+        id
+        name
+        isAvailable
+        description
+        rating
+        price
+        category {
+          id
+          name
+        }
+        discount
+        CategoryId
+        quantity
+      },
+      PaymentId,
+      payment {
+        amount,
+        provider
+      },
+      UserId,
+      user {
+        username,
+        firstName,
+        lastName
+      }
+    }
+  }
+}
